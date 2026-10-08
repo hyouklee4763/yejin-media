@@ -12,7 +12,9 @@
   :root { --bg:#10110e; --surface:#181b14; --fg:#f4efe4; --muted:#b2ab9c; --accent:#d6ff3e; --ink:#14160c; --line:#2e3326; }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin:0; background:var(--bg); color:var(--fg); font-family:Pretendard,"Apple SD Gothic Neo",sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  body { margin:0; color:var(--fg); font-family:Pretendard,"Apple SD Gothic Neo",sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; background:#16130f url("king-master-wide.jpg?v=3") center / cover no-repeat fixed; }
+  body::before { content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background:linear-gradient(180deg, rgba(10,8,6,.35), rgba(10,8,6,.55)); }
+  header, main, footer { position:relative; z-index:1; }
   a { color:inherit; text-decoration:none; }
   img { max-width:100%; display:block; }
   .wrap { width:min(1120px, calc(100% - 40px)); margin:0 auto; }
@@ -33,7 +35,7 @@
   .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
   .grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-  .card { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:20px; }
+  .card { background:rgba(16,18,12,.72); border:1px solid var(--line); border-radius:18px; padding:20px; }
   .tag { display:inline-block; background:var(--accent); color:var(--ink); border-radius:999px; font-size:12px; font-weight:800; padding:2px 8px; }
   .step { border-top:2px solid var(--accent); padding-top:12px; }
   figure { margin:36px 0 0; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--surface); }
@@ -311,7 +313,7 @@ fetch("site.json").then(r => r.json()).then(s => {
   const set = (id, text) => { const n = document.getElementById(id); if (n && text) n.textContent = text; };
   set("t-kicker", s.작은제목);
   const h1 = document.getElementById("t-h1");
-  if (h1 && s.큰제목) h1.innerHTML = s.큰제목.replace(/&/g,"&").replace(/</g,"<").replace(/\n/g,"<br/>");
+  if (h1 && s.큰제목) h1.innerHTML = s.큰제목.replace(/&/g,"\u0026amp;").replace(/</g,"\u0026lt;").replace(/\n/g,"<br/>");
   set("t-intro", s.소개);
   set("t-hello", s.상담문구);
   set("t-career", s.경력);
