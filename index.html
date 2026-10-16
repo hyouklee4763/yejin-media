@@ -13,7 +13,6 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin:0; color:var(--fg); font-family:Pretendard,"Apple SD Gothic Neo",sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; background:#000; }
-  /* body::before removed for solid black background */
   header, main, footer { position:relative; z-index:1; }
   a { color:inherit; text-decoration:none; }
   img { max-width:100%; display:block; }
@@ -39,6 +38,12 @@
   .tag { display:inline-block; background:var(--accent); color:var(--ink); border-radius:999px; font-size:12px; font-weight:800; padding:2px 8px; }
   .step { border-top:2px solid var(--accent); padding-top:12px; }
   figure { margin:36px 0 0; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--surface); }
+  .slideshow { position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; }
+  .slideshow img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .7s ease; }
+  .slideshow img.active { opacity:1; }
+  .slide-nav { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:2; }
+  .slide-nav button { width:10px; height:10px; border-radius:50%; border:0; background:rgba(255,255,255,.45); cursor:pointer; padding:0; }
+  .slide-nav button.active { background:var(--accent); }
   .samples { display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start; margin-top:28px; }
   .short { width:min(360px,100%); aspect-ratio:9/16; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:#000; }
   .wide { flex:1; min-width:min(100%,420px); aspect-ratio:16/9; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:#000; }
@@ -88,32 +93,126 @@
         <a class="btn ghost" href="#work">작업 범위</a>
       </div>
       <figure>
-        <img src="king-master-wide.jpg?v=3" alt="영상편집 King 마스터. 편하게 물어보세요. 친질하게 상담해 드립니다." />
+        <div class="slideshow" id="slideshow">
+          <img src="king-master-wide.jpg?v=3" alt="메인" class="active" />
+          <img src="work/docu-on.png" alt="다큐온" />
+          <img src="work/documentary.png" alt="다큐멘터리" />
+          <img src="work/extreme-job.jpg" alt="극한직업" />
+          <img src="work/theme-trip.png" alt="세계테마기행" />
+          <img src="work/success.png" alt="성공의 정석" />
+          <img src="work/table.png" alt="한국인의 밥상" />
+          <div class="slide-nav" id="slide-nav"></div>
+        </div>
         <figcaption>
-          <p id="t-hello" style="font-weight:800;font-size:18px;margin:0 0 8px">편하게 물어보세요. 친질하게 상담해 드립니다.</p>
-          <p class="muted" id="t-career" style="margin:0">한국인의 밥상, TV는 사랑을 싣고, 6시 내고향, KBS다큐온, KBS다큐공감, 극한직업, 세계테마기행, 다큐프라임 등 방송 경력으로 최선을 다하겠습니다.</p>
+          <p id="t-hello" style="font-weight:800;font-size:18px;margin:0 0 8px">편하게 물어보세요. 친절하게 상담해 드립니다.</p>
+          <p class="muted" id="t-career" style="margin:0">한국인의 밥상, TV는 사랑을 실고, 6시 내고향, KBS다큐온, KBS다큐공감, 극한직업, 세계테마기행, 다큐프라임 등 방송 경력으로 최선을 다하겠습니다.</p>
         </figcaption>
       </figure>
     </div>
   </section>
+
   <section id="sample"><div class="wrap">
     <h2>샘플 영상</h2>
     <p class="muted">숏츠와 본편 샘플입니다. 전체 목록은 <a href="board.html" style="color:var(--accent);font-weight:800">영상 게시판</a>에 있습니다.</p>
-    <div class="samples" id="t-samples">
-      <div class="short">
-        <iframe src="https://www.youtube.com/embed/3kM91ZG8Fwo" title="예진미디어 숏츠 샘플" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="short">
-        <iframe src="https://www.youtube.com/embed/RXKKegwMXAM" title="예진미디어 숏츠 샘플 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="short">
-        <iframe src="https://www.youtube.com/embed/HCYZ9P_2wcQ" title="예진미디어 숏츠 샘플 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="wide">
-        <iframe src="https://www.youtube.com/embed/HrokOHBtLNs" title="예진미디어 영상 샘플" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
+    <div class="samples">
+      <div class="short"><iframe src="https://www.youtube.com/embed/3kM91ZG8Fwo" title="숏츠 샘플" allowfullscreen></iframe></div>
+      <div class="short"><iframe src="https://www.youtube.com/embed/RXKKegwMXAM" title="숏츠 샘플 2" allowfullscreen></iframe></div>
+      <div class="short"><iframe src="https://www.youtube.com/embed/HCYZ9P_2wcQ" title="숏츠 샘플 3" allowfullscreen></iframe></div>
+      <div class="wide"><iframe src="https://www.youtube.com/embed/HrokOHBtLNs" title="본편 샘플" allowfullscreen></iframe></div>
     </div>
   </div></section>
-  <!-- The rest of the original content continues with all sections, scripts, etc. This is a shortened version for the call, but the actual update should use the complete file from /tmp/index_black.html -->
+
+  <section id="past"><div class="wrap">
+    <h2>지난 작업</h2>
+    <p class="muted">방송 타이틀입니다. 사진을 누르시면 크게 보실 수 있습니다.</p>
+    <div class="past">
+      <figure><img src="work/docu-on.png" alt="다큐온"><figcaption>다큐온</figcaption></figure>
+      <figure><img src="work/documentary.png" alt="일요특선 다큐멘터리"><figcaption>일요특선 다큐멘터리</figcaption></figure>
+      <figure><img src="work/table.png" alt="한국인의 밥상"><figcaption>한국인의 밥상</figcaption></figure>
+      <figure><img src="work/extreme-job.jpg" alt="극한직업"><figcaption>극한직업</figcaption></figure>
+      <figure><img src="work/theme-trip.png" alt="세계테마기행"><figcaption>세계테마기행</figcaption></figure>
+      <figure><img src="work/success.png" alt="성공의 정석"><figcaption>성공의 정석</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section id="tools"><div class="wrap">
+    <h2>편집은 이 네 가지로 합니다</h2>
+    <p class="muted">프로그램이 나뉘어도 납품은 한 패키지입니다. 컷, 모션, 자막, 스틸을 나눠 받으시고, 한 번에 돌려드립니다.</p>
+    <div class="grid4">
+      <div class="card"><h3>Final Cut Pro</h3><p class="muted">컷 · 색 · 오디오</p><p>숏폼과 본편 타임라인, 점프컷, 레벨, 색보정을 합니다. 4K 마스터는 여기서 마무리합니다.</p></div>
+      <div class="card"><h3>After Effects</h3><p class="muted">모션 · 합성</p><p>인포그래픽, 수치, 로고 모션을 만듭니다. 설명형 컷을 파이널 컷에 넣습니다.</p></div>
+      <div class="card"><h3>Motion</h3><p class="muted">자막 · 템플릿</p><p>오프닝, 하단 자막, 엔딩을 맞춥니다. 시리즈가 반복되어도 톤이 흔들리지 않게 고정합니다.</p></div>
+      <div class="card"><h3>Photoshop</h3><p class="muted">스틸 · 썸네일</p><p>썸네일과 배너를 만듭니다. 글자가 작아져도 읽히도록 대비와 크롭을 맞춥니다.</p></div>
+    </div>
+  </div></section>
+
+  <section id="work"><div class="wrap">
+    <h2>종편실에서 하는 일입니다</h2>
+    <p class="muted">예상 작업일은 1인 편집 기준입니다. 편수가 늘면 일정 계산기도 함께 늘어납니다.</p>
+  </div></section>
+
+  <section id="price"><div class="wrap">
+    <h2>가격과 문의</h2>
+    <p class="muted">금액은 편수와 난이도를 확인한 뒤 안내드립니다. 전화로 바로 문의하셔도 됩니다.</p>
+    <div class="grid2">
+      <div class="card"><p class="muted">전화번호</p><p style="font-size:24px;font-weight:800">010-3333-4763</p></div>
+      <div class="card"><p class="muted">주소</p><p style="font-size:24px;font-weight:800">서울</p></div>
+    </div>
+  </div></section>
+
+  <section id="desk"><div class="wrap">
+    <h2>일은 이렇게 진행됩니다</h2>
+    <div class="grid4">
+      <div class="step"><p class="kicker">01</p><h3>의뢰</h3><p class="muted">종류, 편수, 납기, 참고 영상만 적어 주시면 됩니다.</p></div>
+      <div class="step"><p class="kicker">02</p><h3>일정</h3><p class="muted">예상 작업일과 가능 여부를 확인한 뒤 일정을 확정합니다.</p></div>
+      <div class="step"><p class="kicker">03</p><h3>종편</h3><p class="muted">컷한 뒤 모션·자막·썸네일을 붙입니다. 중간 시사는 1회입니다.</p></div>
+      <div class="step"><p class="kicker">04</p><h3>납품</h3><p class="muted">수정 2회를 반영한 뒤 마스터, SRT, 썸네일을 전달합니다.</p></div>
+    </div>
+  </div></section>
+
+  <section id="book"><div class="wrap">
+    <h2>일정을 잡고 의뢰해 주세요</h2>
+    <p class="muted">작업 종류와 편수를 고르시면 예상 작업일이 나옵니다. 접수함은 이 브라우저에만 저장됩니다.</p>
+    <div class="card" style="margin-top:20px">
+      <p class="muted">예상 작업일</p>
+      <p class="days">2일</p>
+      <div class="row">
+        <button class="btn" type="button">접수함에 넣기</button>
+        <button class="btn ghost" type="button">메일로 보내기</button>
+        <button class="btn ghost" type="button">복사</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>접수함</h3>
+      <button class="btn ghost" type="button" style="margin-bottom:12px">접수함 비우기</button>
+      <p class="muted">아직 없습니다. 의뢰를 넣으시면 여기에 쌓이고, 진행과 완료로 옮기실 수 있습니다.</p>
+    </div>
+  </div></section>
+</main>
+<footer><div class="wrap">© 예진미디어</div></footer>
+
+<script>
+const slides = document.querySelectorAll('#slideshow img');
+const nav = document.getElementById('slide-nav');
+let current = 0;
+
+slides.forEach((_, i) => {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  if (i === 0) btn.classList.add('active');
+  btn.onclick = () => goTo(i);
+  nav.appendChild(btn);
+});
+
+function goTo(i) {
+  slides[current].classList.remove('active');
+  nav.children[current].classList.remove('active');
+  current = (i + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  nav.children[current].classList.add('active');
+}
+
+setInterval(() => goTo(current + 1), 4000);
+</script>
 </body>
 </html>
